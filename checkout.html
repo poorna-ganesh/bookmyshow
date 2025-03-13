@@ -76,26 +76,26 @@ header {
         <button id="confirm-btn" onclick="confirmBooking()">Confirm Booking</button>
         <p id="confirmation-message"></p>
     </main>
-
     <script>
         function getQueryParam(name) {
             const urlParams = new URLSearchParams(window.location.search);
             return urlParams.get(name) || 'N/A';
         }
-
+    
         document.getElementById('movie').textContent = getQueryParam('movie');
         document.getElementById('time').textContent = getQueryParam('time');
         document.getElementById('seats').textContent = getQueryParam('seats');
-
+    
         function confirmBooking() {
             const message = document.getElementById('confirmation-message');
             message.textContent = '🎉 Booking Confirmed! Redirecting...';
             message.classList.add('success-message');
-
+    
             setTimeout(() => {
                 window.location.href = 'index.html';
             }, 2000);
         }
     </script>
+    
 </body>
 </html>
