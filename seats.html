@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Seats | BookMyShow Clone</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f8f8f8;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: #d32f2f;
+            color: white;
+            padding: 15px;
+            font-size: 24px;
+        }
+
+        .seats-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .seat-row {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        .seat {
+            width: 40px;
+            height: 40px;
+            margin: 5px;
+            border-radius: 5px;
+            border: 2px solid #444;
+            background-color: #ddd;
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .seat:hover {
+            background-color: #bbb;
+        }
+
+        .seat.selected {
+            background-color: #28a745;
+            color: white;
+            border-color: #1e7e34;
+        }
+
+        .seat.occupied {
+            background-color: #6c757d;
+            cursor: not-allowed;
+        }
+
+        .screen {
+            width: 80%;
+            height: 50px;
+            background: #333;
+            color: white;
+            text-align: center;
+            line-height: 50px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #d32f2f;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 20px;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #b71c1c;
+        }
+    </style>
+</head>
+<body>
+
+    <header>BookMyShow Clone</header>
+    
+    <main>
+        <h2>Movie: <span id="selected-movie"></span></h2>
+        <h3>Showtime: <span id="selected-time"></span></h3>
+
+        <div class="screen">SCREEN</div>
+
+        <div class="seats-container">
+            <div class="seat-row">
+                <button class="seat" data-seat="A1"></button>
+                <button class="seat" data-seat="A2"></button>
+                <button class="seat" data-seat="A3"></button>
+                <button class="seat" data-seat="A4"></button>
+            </div>
+            <div class="seat-row">
+                <button class="seat" data-seat="B1"></button>
+                <button class="seat occupied" data-seat="B2"></button>
+                <button class="seat" data-seat="B3"></button>
+                <button class="seat" data-seat="B4"></button>
+            </div>
+            <div class="seat-row">
+                <button class="seat" data-seat="C1"></button>
+                <button class="seat" data-seat="C2"></button>
+                <button class="seat" data-seat="C3"></button>
+                <button class="seat occupied" data-seat="C4"></button>
+            </div>
+        </div>
+
+        <button onclick="checkout()">Proceed to Payment</button>
+    </main>
+
+    <script>
+        // Retrieve query parameters
+        function getQueryParam(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        // Populate movie and showtime details
+        document.getElementById('selected-movie').textContent = getQueryParam('movie') || "Unknown";
+        document.getElementById('selected-time').textContent = getQueryParam('time') || "Not Selected";
+
+        // Event delegation for seat selection
+        document.querySelector(".seats-container").addEventListener("click", function(event) {
+            if (event.target.classList.contains("seat") && !event.target.classList.contains("occupied")) {
+                event.target.classList.toggle("selected");
+            }
+        });
+
+        // Proceed to checkout
+        function checkout() {
+            let selectedSeats = Array.from(document.querySelectorAll('.seat.selected')).map(seat => seat.dataset.seat);
+            if (selectedSeats.length === 0) {
+                alert('Please select at least one seat.');
+                return;
+            }
+            window.location.href = `checkout.html?movie=${encodeURIComponent(getQueryParam('movie'))}&time=${encodeURIComponent(getQueryParam('time'))}&seats=${encodeURIComponent(selectedSeats.join(','))}`;
+        }
+    </script>
+
+</body>
+</html>

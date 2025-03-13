@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Showtime | BookMyShow Clone</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f8f8f8;
+            padding: 20px;
+        }
+
+        header {
+            background-color: #d32f2f;
+            color: white;
+            padding: 15px;
+            font-size: 24px;
+        }
+
+        main {
+            margin-top: 20px;
+        }
+
+        .showtimes {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .showtime-btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            background-color: #d32f2f;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .showtime-btn:hover {
+            background-color: #b71c1c;
+        }
+    </style>
+</head>
+<body>
+
+    <header>BookMyShow Clone</header>
+    
+    <main>
+        <section>
+            <h2>Now Showing: <span id="movie-title"></span></h2>
+            <h3>Select Showtime</h3>
+            <div class="showtimes" id="showtime-container"></div>
+        </section>
+    </main>
+
+    <script>
+        function getQueryParam(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        document.getElementById('movie-title').textContent = getQueryParam('movie') || "Unknown Movie";
+
+        // Showtimes array
+        const showtimes = ["10:00 AM", "1:00 PM", "4:00 PM", "7:00 PM", "9:30 PM"];
+
+        // Generate buttons dynamically
+        const container = document.getElementById("showtime-container");
+        showtimes.forEach(time => {
+            const button = document.createElement("button");
+            button.classList.add("showtime-btn");
+            button.textContent = time;
+            button.onclick = () => selectSeats(time);
+            container.appendChild(button);
+        });
+
+        function selectSeats(time) {
+            window.location.href = `seats.html?movie=${encodeURIComponent(getQueryParam('movie'))}&time=${encodeURIComponent(time)}`;
+        }
+    </script>
+
+</body>
+</html>
