@@ -1,4 +1,4 @@
- BookMyShow Clone
+BookMyShow Clone
 A BookMyShow Clone built using modern web technologies. This project replicates the core functionalities of the BookMyShow website, allowing users to browse and book movie tickets seamlessly.
 
 🚀 Project Setup
@@ -23,13 +23,16 @@ npm start
 The project should now be running on http://localhost:3000/. 🎬
 
 🛠 Technologies Used
-Frontend: React.js, Tailwind CSS
+Tech Stack
+React.js
 
-Backend: Node.js, Express.js (if applicable)
+Bootstrap
 
-Database: MongoDB/Firebase (if applicable)
+Node.js
 
-Other: Redux, Axios, etc.
+Express.js
+
+MongoDB
 
 📌 Features
 ✅ Browse movies & showtimes
