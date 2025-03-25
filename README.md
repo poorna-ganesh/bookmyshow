@@ -25,13 +25,9 @@ The project should now be running on http://localhost:3000/. 🎬
 🛠 Technologies Used
 Tech Stack
 React.js
-
 Bootstrap
-
 Node.js
-
 Express.js
-
 MongoDB
 
 📌 Features
